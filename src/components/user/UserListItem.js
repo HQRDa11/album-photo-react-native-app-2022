@@ -1,9 +1,10 @@
 // src/components/user/UserListItem.js 
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity }
-  from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
-function UserListItem({ navigation, user }) {
+function UserListItem({ user }) {
+  const navigation = useNavigation();
   const onPress = () => navigation.navigate("UserDetails", { id: user.id })
   return (
     <TouchableOpacity onPress={onPress}>

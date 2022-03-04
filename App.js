@@ -1,14 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
-import { StyleSheet, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import UserList from './src/components/user/UserList';
+import UserListScreen from './src/screens/user/UserListScreen';
+import UserAddScreen from './src/screens/user/UserAddScreen';
+import UserDetailsScreen from './src/screens/user/UserDetailsScreen';
 
+const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <View style={styles.container}>
-      <UserList />
-      <StatusBar style='auto' />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='UserList' component={UserListScreen} options={({ navigation }) => ({
+          headerRight: () => <Button title="Add User" onPress={() => navigation.navigate("UserAdd")} />
+        })} />
+        <Stack.Screen name='UserAdd' component={UserAddScreen} />
+        <Stack.Screen name='UserDetails' component={UserDetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+
   );
 }
 
