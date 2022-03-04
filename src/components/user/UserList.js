@@ -4,21 +4,21 @@ import UserListItem from "./UserListItem"
 
 function UserList(props) {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const loadUsers = async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
-    const newUsers = await res.json();
-    setUsers(newUsers);
+    setLoading(true);
+    try {
+      const res = await fetch('https://jsonplaceholder.typicode.com/users');
+      const newUsers = await res.json();
+      setUsers(newUsers);
+    } catch (error) {
+      alert("Network Error");
+    }
+    setLoading(false);
   }
   //componentDidMount
   useEffect(() => {
-    try {
-      loadUsers()
-    } catch (error) {
-      console.log(error);
-    }
-    return () => {
-      // cleanup
-    };
+    loadUsers();
   }, []);
   return (
     <FlatList
@@ -27,6 +27,8 @@ function UserList(props) {
       renderItem={({ item }) => (
         <UserListItem user={item} />
       )}
+      refreshing={loading}
+      onRefresh={loadUsers}
     />
   )
 }
