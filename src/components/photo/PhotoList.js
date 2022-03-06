@@ -1,5 +1,9 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Alert, FlatList, Image, Modal, Pressable, StyleSheet, Text, View } from "react-native"
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { actionsCreators } from "../../../store";
 import PhotoListItem from "./PhotoListItem"
 
 function PhotoList({ albumId }) {
@@ -7,7 +11,15 @@ function PhotoList({ albumId }) {
   const [currentPhoto, setCurrentPhoto] = useState({});
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-
+  const photoToBeAdded = useSelector(state => state.currentPhoto)
+  const dispatch = useDispatch();
+  useFocusEffect(() => {
+    if (photoToBeAdded) {
+      const id = photos.length > 0 ? photos[photos.length - 1].id + 1 : 1000;
+      setPhotos(photos => [...photos, { id: id, title: "test", url: photoToBeAdded.uri, thumbnailUrl: photoToBeAdded.uri }]);
+      dispatch(actionsCreators.setCurrentPhoto(null));
+    }
+  })
   const loadPhotos = async (albumId) => {
     setLoading(true);
     try {
