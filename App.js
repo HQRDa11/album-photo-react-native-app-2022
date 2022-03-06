@@ -8,6 +8,8 @@ import UserListScreen from './src/screens/user/UserListScreen';
 import UserAddScreen from './src/screens/user/UserAddScreen';
 import UserDetailsScreen from './src/screens/user/UserDetailsScreen';
 import AlbumListScreen from './src/screens/album/AlbumListScreen';
+import AlbumDetailsScreen from './src/screens/album/AlbumDetailsScreen';
+import PhotoListScreen from './src/screens/photo/PhotoListScreen';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -20,6 +22,8 @@ export default function App() {
         <Stack.Screen name='UserAdd' component={UserAddScreen} />
         <Stack.Screen name='UserDetails' component={UserDetailsScreen} />
         <Stack.Screen name='AlbumList' component={AlbumListScreen} />
+        <Stack.Screen name='AlbumDetails' component={AlbumDetailsScreen} />
+        <Stack.Screen name='PhotoList' component={PhotoListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
+import AlbumList from "../../components/album/AlbumList";
 
-export default function AlbumListScreen(props) {
+export default function AlbumListScreen({ route }) {
+  const albumId = route.params.albumId;
   return (
-    <View>
-      <Text>Album list</Text>
-    </View>
+    <AlbumList albumId={albumId} />
   )
 }

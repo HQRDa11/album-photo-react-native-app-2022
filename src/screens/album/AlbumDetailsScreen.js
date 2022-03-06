@@ -1,40 +1,40 @@
 import { useEffect, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native"
+import { Alert, Button, StyleSheet, Text, View } from "react-native"
 import { ActivityIndicator } from "react-native";
-import UserDetails from "../../components/user/UserDetails";
+import AlbumDetails from "../../components/album/AlbumDetails";
 
-const UserDetailsScreen = ({ route }) => {
-  // console.log(route.params.id);
+const AlbumDetailsScreen = ({ route }) => {
   const id = route.params.id;
-  const [user, setUser] = useState({});
+  const [album, setAlbum] = useState({});
   const [loading, setLoading] = useState(false);
-  const loadUser = async (id) => {
+  const loadAlbum = async (id) => {
     setLoading(true)
     try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/users/" + id);
+      const res = await fetch("https://jsonplaceholder.typicode.com/albums/" + id);
       // console.log(res.status);
       if (res.status !== 200) {
         Alert.alert("Erreur", "Echec de récupération de données !", [{
           text: "OK", style: "default"
         }])
       }
-      const newUser = await res.json();
-      setUser(newUser);
+      const newAlbum = await res.json();
+      setAlbum(newAlbum);
       setLoading(false)
     } catch (error) {
       Alert.alert("Erreur", "Echec de récupération des données !", [{
         text: "OK", style: "default"
       }])
+      setLoading(false)
     }
 
   }
   useEffect(() => {
-    loadUser(id);
-  }, [id]);
+    loadAlbum(id);
+  }, []);
 
   return (
     <View style={[styles.container, styles.horizontal]}>
-      {loading ? <ActivityIndicator size="large" color="red" /> : <UserDetails user={user} />}
+      {loading ? <ActivityIndicator size="large" color="red" /> : <AlbumDetails album={album} />}
     </View>
   )
 }
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-export default UserDetailsScreen
+export default AlbumDetailsScreen
