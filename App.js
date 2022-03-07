@@ -10,6 +10,7 @@ import PhotoListScreen from './src/screens/photo/PhotoListScreen';
 import TakePicture from './src/components/utils/TakePicture';
 import { Provider } from 'react-redux';
 import store from './store';
+import Login from './src/components/login';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login}/>
           <Stack.Screen name='UserList' component={UserListScreen} options={({ navigation }) => ({
             headerRight: () => <Button title="Add User" onPress={() => navigation.navigate("UserAdd")} />
           })} />

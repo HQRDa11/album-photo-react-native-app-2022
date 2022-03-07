@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native"
 import { useSelector } from "react-redux";
@@ -30,6 +31,11 @@ function UserList(props) {
   //componentDidMount
   useEffect(() => {
     loadUsers();
+    (async ()=> {
+      const user = await AsyncStorage.getItem("current_user")
+      alert.alert(JSON.parse(user).username);
+
+    })()
   }, []);
   return loading ? (
     <View style={[styles.container, styles.horizontal]}>

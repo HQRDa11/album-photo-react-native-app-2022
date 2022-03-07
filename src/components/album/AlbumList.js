@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FlatList } from "react-native"
 import AlbumListItem from "./AlbumListItem"
 
 function AlbumList({ userId }) {
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(false);
-  const loadAlbums = async () => {
+  const loadAlbums = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch('https://jsonplaceholder.typicode.com/albums/' + userId + "/albums");
@@ -15,7 +15,7 @@ function AlbumList({ userId }) {
       alert("Network Error");
     }
     setLoading(false);
-  }
+  }, [])
   //componentDidMount
   useEffect(() => {
     loadAlbums();

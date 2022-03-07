@@ -1,10 +1,8 @@
-import { Text, View } from "react-native"
+import UserAdd from "../../components/user/UserAdd"
 
 const UserAddScreen = () => {
   return (
-    <View>
-      <Text>Ajouter un utilisateur</Text>
-    </View>
+    <UserAdd/>
   )
 }
 export default UserAddScreen

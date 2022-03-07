@@ -54,6 +54,9 @@ const reducers = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOAD_USERS:
       return { ...state, user: { ...state.user, users: action.value } }
+    case actionTypes.ADD_USER:
+      const id = state.user.users.length > 0 ? state.user.users[state.user.users.length-1].id+1 : 1000
+      return { ...state, user: { ...state.user, users: [...state.user.users, {...action.value, id: id}] } }
     case actionTypes.ASYNC_OP_START:
       return { ...state, loading: true }
     case actionTypes.ASYNC_OP_SUCCESS:
