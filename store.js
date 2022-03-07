@@ -3,6 +3,7 @@ import { createStore } from "redux"
 const initialState = {
   user: {
     users: [],
+    addMode: false,
   },
   currentPhoto: null,
   loading: false,
@@ -16,7 +17,8 @@ const actionTypes = {
   ADD_USER: "ADD_USER",
   UPDATE_USER: "UPDATE_USER",
   DELETE_USER: "DELETE_USER",
-  SET_CURRENT_PHOTO: "SET_CURRENT_PHOTO"
+  SET_CURRENT_PHOTO: "SET_CURRENT_PHOTO",
+  SET_ADD_MODE:"SET_ADD_MODE"
 }
 export const actionsCreators = {
   loadUsers: (users) => ({
@@ -32,9 +34,9 @@ export const actionsCreators = {
   setAsyncOperationFailure: () => ({
     type: actionTypes.ASYNC_OP_FAILURE
   }),
-  addUser: (user) => ({
+  addUser: (name) => ({
     type: actionTypes.ADD_USER,
-    value: user
+    name:name
   }),
   updateUser: (user) => ({
     type: actionTypes.UPDATE_USER,
@@ -47,6 +49,10 @@ export const actionsCreators = {
   setCurrentPhoto: (photo) => ({
     type: actionTypes.SET_CURRENT_PHOTO,
     value: photo
+  }),
+  setAddMode: (addMode) => ({
+    type: actionTypes.SET_ADD_MODE,
+    value: addMode
   }),
 }
 
@@ -62,6 +68,12 @@ const reducers = (state = initialState, action) => {
       return { ...state, loading: false, error: true }
     case actionTypes.SET_CURRENT_PHOTO:
       return { ...state, currentPhoto: action.value }
+    case actionTypes.ADD_USER:
+      console.log(state);
+      const id = state.user.users.length > 0 ? state.user.users[state.user.users.length - 1].id+1 : 1;
+      return  { ...state, user: { ...state.user, users: [...state.user.users, { id: id, name: action.name }]} }
+    case actionTypes.SET_ADD_MODE:
+      return { ...state, addMode: action.value }
 
     default:
       return state;

@@ -17,7 +17,7 @@ function UserList(props) {
     try {
       const res = await fetch('https://jsonplaceholder.typicode.com/users');
       const newUsers = await res.json();
-      // setUsers(newUsers);
+      //setUsers(newUsers);
       dispatch(actionsCreators.loadUsers(newUsers));
       dispatch(actionsCreators.setAsyncOperationSuccess());
     } catch (error) {
