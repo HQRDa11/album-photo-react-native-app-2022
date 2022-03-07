@@ -34,9 +34,10 @@ export const actionsCreators = {
   setAsyncOperationFailure: () => ({
     type: actionTypes.ASYNC_OP_FAILURE
   }),
-  addUser: (name) => ({
+  addUser: (name, email) => ({
     type: actionTypes.ADD_USER,
-    name:name
+    name:name,
+    email:email
   }),
   updateUser: (user) => ({
     type: actionTypes.UPDATE_USER,
@@ -71,7 +72,7 @@ const reducers = (state = initialState, action) => {
     case actionTypes.ADD_USER:
       console.log(state);
       const id = state.user.users.length > 0 ? state.user.users[state.user.users.length - 1].id+1 : 1;
-      return  { ...state, user: { ...state.user, users: [...state.user.users, { id: id, name: action.name }]} }
+      return  { ...state, user: { ...state.user, users: [...state.user.users, { id: id, name:action.name, email:action.email}]} }
     case actionTypes.SET_ADD_MODE:
       return { ...state, addMode: action.value }
 

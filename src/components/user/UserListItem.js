@@ -10,6 +10,7 @@ function UserListItem({ user }) {
     <TouchableOpacity onPress={onPress}>
       <View style={styles.user}>
         <Text>{user.name}</Text>
+        <Text>{user.email}</Text>
       </View>
     </TouchableOpacity>
   )
