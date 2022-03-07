@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 
 function PhotoListItem({ photo, showPhotoDetails }) {
   const navigation = useNavigation();
-  console.log(photo);
+  // console.log(photo);
   const onPress = () => showPhotoDetails(photo.id);
   return (
     <TouchableOpacity onPress={onPress}>

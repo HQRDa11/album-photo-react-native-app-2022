@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { FlatList } from "react-native"
 import AlbumListItem from "./AlbumListItem"
 
-function AlbumList({ albumId }) {
+function AlbumList({ userId }) {
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(false);
   const loadAlbums = async () => {
     setLoading(true);
     try {
-      const res = await fetch('https://jsonplaceholder.typicode.com/albums/' + albumId + "/albums");
+      const res = await fetch('https://jsonplaceholder.typicode.com/albums/' + userId + "/albums");
       const newAlbums = await res.json();
       setAlbums(newAlbums);
     } catch (error) {
